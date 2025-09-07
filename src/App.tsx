@@ -67,7 +67,8 @@ const App: React.FC = () => {
             }}
           >
             Hi, I'm <strong style={{ color: "#646cff" }}>Rajiv Shrestha</strong>, a passionate 2nd-year Computer Science student 
-            on a journey to master cybersecurity.
+            on a journey to master cybersecurity
+            .
           </p>
         </div>
 
