@@ -16,54 +16,40 @@ export default tseslint.config([
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    # Rajiv Shrestha — Portfolio
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+    Hi — I'm Rajiv. This repository contains my personal portfolio built with React + Vite (plus a small static copy in `static_portfolio/`).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    ## About me
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    - Where I started: I began with web development — building projects with HTML, CSS and JavaScript while learning the fundamentals of front-end engineering.
+    - What I'm doing now: I'm a 2nd-year Computer Science student transitioning into cybersecurity. I focus on web application security, penetration testing, and practical network security. I also participate in CTFs and hackathons to sharpen hands-on skills.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    ## Selected projects
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    - SEEKHANEPAL — KIST Hackathon: A platform to help students discover interests with interactive demos and an AI chatbot. (Live: https://seekhanepal.vercel.app/)
+    - SarkarSevaSaathi — 100x Nepal Hackathon 2025: Team Control Bits — built Form Mitra Smart, a GovTech web app for helping citizens complete government forms.
+    - Network Security Scanner: A Bash-based reconnaissance and port scanning tool for learning network security and assessments.
+
+    ## Run locally (React)
+
+    Install dependencies and start the Vite dev server:
+
+    ```sh
+    npm install
+    npm run dev
+    ```
+
+    Open the URL shown by Vite (usually http://localhost:5173).
+
+    There is also a standalone static copy you can open in a browser at `static_portfolio/index.html`.
+
+    ## Contact
+
+    - Email: rajiv@example.com
+    - GitHub: https://github.com/yourusername
+
+    ---
+
+    If you'd like, I can further shorten or reword any section (or add a resume link and social icons). 
       // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
