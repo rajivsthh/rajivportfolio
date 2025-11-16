@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const App: React.FC = () => {
+  const [active, setActive] = useState<string>('current');
+
+  useEffect(() => {
+    const ids = ['current', 'skills', 'projects', 'contact'];
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          if (entry.isIntersecting) {
+            setActive(id);
+            entry.target.classList.add('in-view');
+          } else {
+            entry.target.classList.remove('in-view');
+          }
+        });
+      },
+      { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0.12 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="app-root">
       <header className="hero">
@@ -13,23 +39,28 @@ const App: React.FC = () => {
           </div>
 
           <nav className="site-nav" aria-label="Main navigation">
-            <ul className="nav-list">
-              <li><a href="#current">Current</a></li>
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
+              <ul className="nav-list">
+                <li><a href="#current" className={active === 'current' ? 'active' : ''}>Current</a></li>
+                <li><a href="#skills" className={active === 'skills' ? 'active' : ''}>Skills</a></li>
+                <li><a href="#projects" className={active === 'projects' ? 'active' : ''}>Projects</a></li>
+                <li><a href="#contact" className={active === 'contact' ? 'active' : ''}>Contact</a></li>
+              </ul>
           </nav>
+
+          <div className="header-actions">
+            <a className="btn" href="mailto:rajivsth0713@gmail.com">Email</a>
+            <a className="btn ghost" href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+          </div>
         </div>
       </header>
 
          <main className="container main">
-          <section id="current" className="current">
+          <section id="current" className="current fade-up">
             <h2 className="section-title">What I'm doing now</h2>
             <p className="lead">I am a 2nd‑year Computer Science student transitioning from web development into cybersecurity. Currently focusing on web application security, penetration testing, and practical network security. I participate in CTFs and hackathons to sharpen hands-on skills.</p>
           </section>
 
-          <section id="skills" className="skills">
+          <section id="skills" className="skills fade-up">
             <h2 className="section-title">Skills & Tools</h2>
 
             <div className="skills-grid">
@@ -73,35 +104,47 @@ const App: React.FC = () => {
           <section id="projects" className="projects">
             <h2 className="section-title">Selected Projects & Hackathons</h2>
              <div className="cards">
-               <article className="card">
+               <article className="card fade-up">
                  <h3>SEEKHANEPAL — KIST Hackathon</h3>
                  <p>Platform helping students discover interests with interactive demos and an AI chatbot. Teachers can enroll.</p>
                  <p className="muted">Live: <a href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">seekhanepal.vercel.app</a></p>
                </article>
 
-               <article className="card">
+               <article className="card fade-up">
                  <h3>SarkarSevaSaathi — 100x Nepal Hackathon 2025</h3>
                  <p>Team Control Bits — Built <em>Form Mitra Smart</em>, a GovTech web app to help citizens fill government forms correctly.</p>
                  <p className="muted">Hackathon: <a href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">100x Nepal Hackathon</a></p>
                </article>
 
-               <article className="card">
+               <article className="card fade-up">
                  <h3>Network Security Scanner</h3>
                  <p>Bash-based network reconnaissance and port scanning tool used for learning network security and assessments.</p>
                </article>
+
+              <article className="card fade-up">
+                <h3>SafeMCP — Contributor</h3>
+                <p>Contributed code and security fixes to the SafeMCP open-source project, focusing on hardening and reliability improvements.</p>
+                <p className="muted">Repository: <a href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">github.com/rajivsthh/safemcp</a></p>
+              </article>
              </div>
            </section>
 
-          <section id="contact" className="contact">
+          <section id="contact" className="contact fade-up">
             <h2 className="section-title">Contact</h2>
-            <p>Email: <a href="mailto:rajiv@example.com">rajiv@example.com</a></p>
-            <p>GitHub: <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">github.com/yourusername</a></p>
+              <div className="contact-card">
+                <p>Email: <a href="mailto:rajivsth0713@gmail.com">rajivsth0713@gmail.com</a></p>
+                <p>GitHub: <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">github.com/rajivsthh</a></p>
+              </div>
           </section>
          </main>
 
       <footer className="footer">
-        <div className="container">
+        <div className="container" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <small>© 2025 Rajiv Shrestha — Crafted with focus on security and clarity.</small>
+          <div className="socials">
+            <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:rajivsth0713@gmail.com">Email</a>
+          </div>
         </div>
       </footer>
     </div>

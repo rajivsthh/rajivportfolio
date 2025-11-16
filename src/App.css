@@ -26,6 +26,12 @@ body { margin: 0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Robo
 .tag { margin: 0; color: var(--muted); font-weight: 600; }
 .lead { margin-top: .6rem; color: var(--muted); max-width: 70ch; line-height: 1.6; }
 
+/* Header actions */
+.header-actions { display:flex; gap:.5rem; align-items:center; }
+.btn { display:inline-block; padding:.5rem .75rem; border-radius:8px; background: var(--accent); color: #06202a; text-decoration:none; font-weight:700; box-shadow: 0 6px 18px rgba(6,32,42,0.08); }
+.btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--text); font-weight:600; }
+.btn:hover { transform: translateY(-1px); }
+
 /* Main layout */
 .main { padding: 3rem 0; flex: 1; }
 .layout { display:block; }
@@ -56,16 +62,33 @@ body { margin: 0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Robo
 .card h3 { margin: 0 0 .5rem 0; font-size: 1.05rem; color: var(--text); }
 .muted { color: var(--muted); font-size: 0.95rem; }
 
+/* project card hover */
+.card { transition: transform .16s ease, box-shadow .16s ease; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.7); }
+
+/* subtle reveal animation for sections and cards */
+.fade-up { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+.fade-up.in-view { opacity: 1; transform: translateY(0); }
+
 .learning ul { padding-left: 1.25rem; margin: 0; color: var(--muted); }
 .learning li { margin-bottom: 0.6rem; }
 
 .contact { margin-top: 2rem; }
 .contact a { color: var(--accent); color: var(--accent); text-decoration: none; }
 
+.contact-card { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border: 1px solid rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; display:inline-block; }
+.contact-card p { margin: .25rem 0; }
+
+/* footer social */
+.footer .socials { display:flex; gap:.6rem; align-items:center; }
+.socials a { color: var(--muted); text-decoration:none; padding:.3rem .4rem; border-radius:6px; }
+.socials a:hover { color: var(--text); background: rgba(255,255,255,0.02); }
+
 .site-nav { display:flex; align-items:center; }
 .nav-list { list-style:none; margin:0; padding:0; display:flex; gap:1rem; }
 .nav-list a { color: var(--muted); text-decoration:none; padding:.4rem .6rem; border-radius:6px; font-weight:600; }
 .nav-list a:hover, .nav-list a:focus { color: var(--text); background: rgba(255,255,255,0.02); }
+.nav-list a.active { color: var(--text); background: linear-gradient(90deg, rgba(56,189,248,0.08), rgba(56,189,248,0.03)); box-shadow: inset 0 -2px 0 rgba(56,189,248,0.12); }
 
 html { scroll-behavior: smooth; }
 
