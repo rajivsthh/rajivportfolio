@@ -103,28 +103,72 @@ const App: React.FC = () => {
 
           <section id="projects" className="projects">
             <h2 className="section-title">Selected Projects & Hackathons</h2>
-             <div className="cards">
-               <article className="card fade-up">
-                 <h3>SEEKHANEPAL — KIST Hackathon</h3>
+            <p className="lead muted">A concise list of notable projects — quick summary, tech used, and direct links.</p>
+
+             <div className="cards project-grid">
+               <article className="card project-card">
+                 <div className="project-header">
+                   <h3>SEEKHANEPAL — KIST Hackathon</h3>
+                   <div className="project-meta">
+                     <div className="tech-list">
+                       <span className="tag">React</span>
+                       <span className="tag">Vercel</span>
+                     </div>
+                   </div>
+                 </div>
                  <p>Platform helping students discover interests with interactive demos and an AI chatbot. Teachers can enroll.</p>
-                 <p className="muted">Live: <a href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">seekhanepal.vercel.app</a></p>
+                 <div className="card-actions">
+                   <a className="btn-link" href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                   <a className="btn-link" href="https://github.com/rajivsthh/seekhanepal" target="_blank" rel="noopener noreferrer">Source</a>
+                 </div>
                </article>
 
-               <article className="card fade-up">
-                 <h3>SarkarSevaSaathi — 100x Nepal Hackathon 2025</h3>
+               <article className="card project-card">
+                 <div className="project-header">
+                   <h3>SarkarSevaSaathi — 100x Nepal Hackathon 2025</h3>
+                   <div className="project-meta">
+                     <div className="tech-list">
+                       <span className="tag">Fullstack</span>
+                       <span className="tag">GovTech</span>
+                     </div>
+                   </div>
+                 </div>
                  <p>Team Control Bits — Built <em>Form Mitra Smart</em>, a GovTech web app to help citizens fill government forms correctly.</p>
-                 <p className="muted">Hackathon: <a href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">100x Nepal Hackathon</a></p>
+                 <div className="card-actions">
+                   <a className="btn-link" href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">Hackathon</a>
+                 </div>
                </article>
 
-               <article className="card fade-up">
-                 <h3>Network Security Scanner</h3>
+               <article className="card project-card">
+                 <div className="project-header">
+                   <h3>Network Security Scanner</h3>
+                   <div className="project-meta">
+                     <div className="tech-list">
+                       <span className="tag">Bash</span>
+                       <span className="tag">Nmap</span>
+                     </div>
+                   </div>
+                 </div>
                  <p>Bash-based network reconnaissance and port scanning tool used for learning network security and assessments.</p>
+                 <div className="card-actions">
+                   <a className="btn-link" href="#" onClick={(e) => e.preventDefault()}>Details</a>
+                 </div>
                </article>
 
-              <article className="card fade-up">
-                <h3>SafeMCP — Contributor</h3>
+              <article className="card project-card">
+                <div className="project-header">
+                  <h3>SafeMCP — Contributor</h3>
+                  <div className="project-meta">
+                    <div className="tech-list">
+                      <span className="tag">Security</span>
+                      <span className="tag">Node</span>
+                    </div>
+                  </div>
+                </div>
                 <p>Contributed code and security fixes to the SafeMCP open-source project, focusing on hardening and reliability improvements.</p>
-                <p className="muted">Repository: <a href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">github.com/rajivsthh/safemcp</a></p>
+                <div className="card-actions">
+                  <a className="btn-link" href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">Repository</a>
+                </div>
               </article>
              </div>
            </section>

@@ -84,6 +84,22 @@ body { margin: 0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Robo
 .socials a { color: var(--muted); text-decoration:none; padding:.3rem .4rem; border-radius:6px; }
 .socials a:hover { color: var(--text); background: rgba(255,255,255,0.02); }
 
+/* Projects: clearer cards */
+.project-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+.project-card { padding: 1.15rem; border-radius: 12px; }
+.project-header { display:flex; justify-content:space-between; align-items:flex-start; gap: .75rem; margin-bottom: .5rem; }
+.project-meta { display:flex; align-items:center; gap:.5rem; }
+.tech-list { display:flex; gap: .4rem; }
+.tag { background: rgba(255,255,255,0.02); color: var(--muted); padding: .2rem .45rem; border-radius: 999px; font-size: .78rem; font-weight:600; }
+.card-actions { margin-top: .85rem; display:flex; gap:.5rem; }
+.btn-link { display:inline-block; padding: .35rem .6rem; border-radius:8px; background: transparent; border: 1px solid rgba(255,255,255,0.04); color: var(--accent); text-decoration:none; font-weight:700; }
+.btn-link:hover { background: rgba(56,189,248,0.06); color: var(--text); }
+
+/* Slightly larger card on wide screens for emphasis */
+@media (min-width: 1100px) {
+  .project-card { padding: 1.25rem; }
+}
+
 .site-nav { display:flex; align-items:center; }
 .nav-list { list-style:none; margin:0; padding:0; display:flex; gap:1rem; }
 .nav-list a { color: var(--muted); text-decoration:none; padding:.4rem .6rem; border-radius:6px; font-weight:600; }
