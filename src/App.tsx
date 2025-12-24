@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [active, setActive] = useState<string>('current');
+  const [active, setActive] = useState<string>("about");
 
   useEffect(() => {
-    const ids = ['current', 'skills', 'projects', 'contact'];
-    const sections = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const ids = ["about", "contributions", "skills", "projects", "goals", "contact"];
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -15,13 +15,13 @@ const App: React.FC = () => {
           const id = entry.target.id;
           if (entry.isIntersecting) {
             setActive(id);
-            entry.target.classList.add('in-view');
+            entry.target.classList.add("in-view");
           } else {
-            entry.target.classList.remove('in-view');
+            entry.target.classList.remove("in-view");
           }
         });
       },
-      { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0.12 }
+      { root: null, rootMargin: "0px 0px -55% 0px", threshold: 0.12 }
     );
 
     sections.forEach((s) => observer.observe(s));
@@ -34,157 +34,192 @@ const App: React.FC = () => {
         <div className="container hero-row">
           <div className="hero-left">
             <h1 className="name">Rajiv Shrestha</h1>
-            <p className="tag">CS Student • Cybersecurity Enthusiast</p>
-            <p className="lead">Building secure, usable web apps — now focusing on security and penetration testing.</p>
+            <p className="tagline">Learning. Breaking. Securing.</p>
+            <p className="tag">Nepal • Cybersecurity • Penetration Testing • Cloud Security</p>
+            <p className="lead">I focus on practical security: web app hardening, penetration testing fundamentals, and cloud security concepts. I build, test, and iterate — learning every step of the way.</p>
           </div>
 
           <nav className="site-nav" aria-label="Main navigation">
-              <ul className="nav-list">
-                <li><a href="#current" className={active === 'current' ? 'active' : ''}>Current</a></li>
-                <li><a href="#skills" className={active === 'skills' ? 'active' : ''}>Skills</a></li>
-                <li><a href="#projects" className={active === 'projects' ? 'active' : ''}>Projects</a></li>
-                <li><a href="#contact" className={active === 'contact' ? 'active' : ''}>Contact</a></li>
-              </ul>
+            <ul className="nav-list">
+              <li>
+                <a href="#about" className={active === "about" ? "active" : ""}>About</a>
+              </li>
+              <li>
+                <a href="#contributions" className={active === "contributions" ? "active" : ""}>Contributions</a>
+              </li>
+              <li>
+                <a href="#skills" className={active === "skills" ? "active" : ""}>Skills</a>
+              </li>
+              <li>
+                <a href="#projects" className={active === "projects" ? "active" : ""}>Projects</a>
+              </li>
+              <li>
+                <a href="#goals" className={active === "goals" ? "active" : ""}>Goals</a>
+              </li>
+              <li>
+                <a href="#contact" className={active === "contact" ? "active" : ""}>Contact</a>
+              </li>
+            </ul>
           </nav>
 
           <div className="header-actions">
             <a className="btn" href="mailto:rajivsth0713@gmail.com">Email</a>
-            <a className="btn ghost" href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a
+              className="btn ghost"
+              href="/resume.pdf"
+              download="Rajiv-Shrestha-Resume.pdf"
+              aria-label="Download Rajiv Shrestha resume (PDF)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
           </div>
         </div>
       </header>
 
-         <main className="container main">
-          <section id="current" className="current fade-up">
-            <h2 className="section-title">What I'm doing now</h2>
-            <p className="lead">I am a 2nd‑year Computer Science student transitioning from web development into cybersecurity. Currently focusing on web application security, penetration testing, and practical network security. I participate in CTFs and hackathons to sharpen hands-on skills.</p>
-          </section>
+      <main className="container main">
+        <section id="about" className="about fade-up">
+          <h2 className="section-title">About Me</h2>
+          <p className="lead">I started with web development and gradually moved into cybersecurity after realizing how critical secure systems are. I'm a 2nd-year Computer Science student at KIST College. My work focuses on practical learning: building small tools, participating in CTFs, and contributing to open documentation. I approach security with curiosity and persistence — aiming to become a confident penetration tester and cloud security practitioner.</p>
+        </section>
 
-          <section id="skills" className="skills fade-up">
-            <h2 className="section-title">Skills & Tools</h2>
+        <section id="contributions" className="contributions fade-up">
+          <h2 className="section-title">Contributions</h2>
+          <ul className="contrib-list">
+            <li>
+              <strong>SAFE-MCP</strong> — Contributor to cybersecurity technique documentation: organizing, updating, and maintaining attacker technique writeups to improve clarity and usability for red-team workflows.
+            </li>
+            <li>
+              <strong>100x Hackathon</strong> — Active participant in hackathon events, collaborating on rapid prototypes and solving real problems under time constraints.
+            </li>
+            <li>
+              <strong>KIST College projects</strong> — Ongoing involvement in college projects, learning teamwork, software design, and deployment basics.
+            </li>
+          </ul>
+        </section>
 
-            <div className="skills-grid">
-              <div className="skill-block">
-                <h3>Security & Tools</h3>
-                <div className="badges">
-                  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux" />
-                  <img src="https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white" alt="Bash" />
-                  {/* <img src="https://img.shields.io/badge/Nmap-2BC4FF?style=flat&logo=nmap&logoColor=white" alt="Nmap" /> */}
-                </div>
-                <ul className="tool-list">
-                  <li>Nmap</li>
-                  <li>Burp Suite</li>
-                  <li>Wireshark</li>
-                  <li>Metasploit</li>
-                  {/* <li>tcpdump</li> */}
-                  <li>SSH / OpenSSH</li>
-                </ul>
-              </div>
-
-              <div className="skill-block">
-                <h3>Web Development</h3>
-                <div className="badges">
-                  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" alt="HTML5" />
-                  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white" alt="CSS3" />
-                  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript" />
-                  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React" />
-                </div>
-                <ul className="tool-list">
-                  <li>HTML5</li>
-                  <li>CSS3 / Responsive Design</li>
-                  <li>JavaScript (ES6+)</li>
-                  <li>React</li>
-                  <li>Node.js / Express (basic)</li>
-                  <li>PHP / Java (familiar)</li>
-                </ul>
-              </div>
+        <section id="skills" className="skills fade-up">
+          <h2 className="section-title">Skills</h2>
+          <div className="skills-grid">
+            <div className="skill-block">
+              <h3>Cybersecurity</h3>
+              <ul className="tool-list">
+                <li>Penetration testing fundamentals</li>
+                <li>Network reconnaissance (Nmap, tcpdump)</li>
+                <li>Web security basics (OWASP mindset, Burp)</li>
+              </ul>
             </div>
-           </section>
 
-          <section id="projects" className="projects">
-            <h2 className="section-title">Selected Projects & Hackathons</h2>
-            <p className="lead muted">A concise list of notable projects — quick summary, tech used, and direct links.</p>
+            <div className="skill-block">
+              <h3>Development</h3>
+              <ul className="tool-list">
+                <li>HTML, CSS, JavaScript (ES6+), React</li>
+                <li>PHP basics, Java (basic)</li>
+                <li>Databases: MySQL</li>
+              </ul>
+            </div>
 
-             <div className="cards project-grid">
-               <article className="card project-card">
-                 <div className="project-header">
-                   <h3>SEEKHANEPAL — KIST Hackathon</h3>
-                   <div className="project-meta">
-                     <div className="tech-list">
-                       <span className="tag">React</span>
-                       <span className="tag">Vercel</span>
-                     </div>
-                   </div>
-                 </div>
-                 <p>Platform helping students discover interests with interactive demos and an AI chatbot. Teachers can enroll.</p>
-                 <div className="card-actions">
-                   <a className="btn-link" href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
-                   <a className="btn-link" href="https://github.com/rajivsthh/seekhanepal" target="_blank" rel="noopener noreferrer">Source</a>
-                 </div>
-               </article>
+            <div className="skill-block">
+              <h3>Tools</h3>
+              <ul className="tool-list">
+                <li>Burp Suite, Wireshark, Metasploit</li>
+                <li>Virtual machines (VMs), Docker basics</li>
+                <li>Git & GitHub</li>
+              </ul>
+            </div>
 
-               <article className="card project-card">
-                 <div className="project-header">
-                   <h3>SarkarSevaSaathi — 100x Nepal Hackathon 2025</h3>
-                   <div className="project-meta">
-                     <div className="tech-list">
-                       <span className="tag">Fullstack</span>
-                       <span className="tag">GovTech</span>
-                     </div>
-                   </div>
-                 </div>
-                 <p>Team Control Bits — Built <em>Form Mitra Smart</em>, a GovTech web app to help citizens fill government forms correctly.</p>
-                 <div className="card-actions">
-                   <a className="btn-link" href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">Hackathon</a>
-                 </div>
-               </article>
+            <div className="skill-block">
+              <h3>Linux</h3>
+              <ul className="tool-list">
+                <li>Arch, Parrot, Kali</li>
+                <li>Bash scripting and command-line tooling</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-               <article className="card project-card">
-                 <div className="project-header">
-                   <h3>Network Security Scanner</h3>
-                   <div className="project-meta">
-                     <div className="tech-list">
-                       <span className="tag">Bash</span>
-                       <span className="tag">Nmap</span>
-                     </div>
-                   </div>
-                 </div>
-                 <p>Bash-based network reconnaissance and port scanning tool used for learning network security and assessments.</p>
-                 <div className="card-actions">
-                   <a className="btn-link" href="#" onClick={(e) => e.preventDefault()}>Details</a>
-                 </div>
-               </article>
-
-              <article className="card project-card">
-                <div className="project-header">
-                  <h3>SafeMCP — Contributor</h3>
-                  <div className="project-meta">
-                    <div className="tech-list">
-                      <span className="tag">Security</span>
-                      <span className="tag">Node</span>
-                    </div>
-                  </div>
+        <section id="projects" className="projects fade-up">
+          <h2 className="section-title">Selected Projects</h2>
+          <p className="lead muted">Short summaries and links for quick review.</p>
+          <div className="cards project-grid">
+            {/* SEEKHANEPAL */}
+            <article className="card project-card">
+              <div className="project-header">
+                <h3>SEEKHANEPAL — KIST Hackathon</h3>
+                <div className="tech-list">
+                  <span className="tag">React</span>
                 </div>
-                <p>Contributed code and security fixes to the SafeMCP open-source project, focusing on hardening and reliability improvements.</p>
-                <div className="card-actions">
-                  <a className="btn-link" href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">Repository</a>
-                </div>
-              </article>
-             </div>
-           </section>
-
-          <section id="contact" className="contact fade-up">
-            <h2 className="section-title">Contact</h2>
-              <div className="contact-card">
-                <p>Email: <a href="mailto:rajivsth0713@gmail.com">rajivsth0713@gmail.com</a></p>
-                <p>GitHub: <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">github.com/rajivsthh</a></p>
               </div>
-          </section>
-         </main>
+              <p>Platform to help students discover interests with interactive demos and an AI assistant.</p>
+              <div className="card-actions">
+                <a className="btn-link" href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                <a className="btn-link" href="https://github.com/rajivsthh/seekhanepal" target="_blank" rel="noopener noreferrer">Source</a>
+              </div>
+            </article>
+
+            {/* SarkarSevaSaathi */}
+            <article className="card project-card">
+              <div className="project-header">
+                <h3>SarkarSevaSaathi — 100x Hackathon</h3>
+                <div className="tech-list">
+                  <span className="tag">Fullstack</span>
+                </div>
+              </div>
+              <p>Form Mitra Smart — a govtech web app to help citizens complete government forms accurately.</p>
+              <div className="card-actions">
+                <a className="btn-link" href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">Hackathon</a>
+              </div>
+            </article>
+
+            {/* Network Scanner */}
+            <article className="card project-card">
+              <div className="project-header">
+                <h3>Network Security Scanner</h3>
+                <div className="tech-list">
+                  <span className="tag">Bash</span>
+                </div>
+              </div>
+              <p>Bash-based tool for network reconnaissance and learning practical scanning techniques.</p>
+            </article>
+
+            {/* SafeMCP */}
+            <article className="card project-card">
+              <div className="project-header">
+                <h3>SAFE-MCP — Documentation Contributor</h3>
+                <div className="tech-list">
+                  <span className="tag">Security</span>
+                </div>
+              </div>
+              <p>Helping organize and maintain attacker technique writeups to improve clarity and usability for practitioners.</p>
+              <div className="card-actions">
+                <a className="btn-link" href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">Repository</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="goals" className="goals fade-up">
+          <h2 className="section-title">Future Goals</h2>
+          <ul className="goals-list">
+            <li>Become a penetration tester with strong web application expertise.</li>
+            <li>Gain practical cloud security skills and secure cloud-native applications.</li>
+            <li>Contribute to open tooling and documentation that helps defenders and red teamers alike.</li>
+          </ul>
+        </section>
+
+        <section id="contact" className="contact fade-up">
+          <h2 className="section-title">Contact</h2>
+          <div className="contact-card">
+            <p>Email: <a href="mailto:rajivsth0713@gmail.com">rajivsth0713@gmail.com</a></p>
+            <p>GitHub: <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">github.com/rajivsthh</a></p>
+          </div>
+        </section>
+      </main>
 
       <footer className="footer">
-        <div className="container" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <small>© 2025 Rajiv Shrestha — Crafted with focus on security and clarity.</small>
+        <div className="container footer-row">
+          <small>© {new Date().getFullYear()} Rajiv Shrestha — Learning. Breaking. Securing.</small>
           <div className="socials">
             <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="mailto:rajivsth0713@gmail.com">Email</a>
