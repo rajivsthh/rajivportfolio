@@ -5,6 +5,7 @@ import posts from "./data/posts";
 const App: React.FC = () => {
   const [active, setActive] = useState<string>("about");
   const [selectedPost, setSelectedPost] = useState<string | null>(null);
+  const [onlySection, setOnlySection] = useState<string | null>(null);
 
   useEffect(() => {
     const ids = ["about", "contributions", "skills", "projects", "blog", "goals", "contact"];
@@ -30,6 +31,19 @@ const App: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // when onlySection changes, toggle a root class so CSS can hide/show sections
+  useEffect(() => {
+    const root = document.querySelector('.app-root');
+    if (!root) return;
+    if (onlySection) root.classList.add('only-show');
+    else root.classList.remove('only-show');
+    // focus the section for keyboard users
+    if (onlySection) {
+      const el = document.getElementById(onlySection);
+      if (el) el.focus();
+    }
+  }, [onlySection]);
+
   return (
     <div className="app-root">
       <header className="hero">
@@ -50,7 +64,19 @@ const App: React.FC = () => {
                 <a href="#contributions" className={active === "contributions" ? "active" : ""}>Contributions</a>
               </li>
               <li>
-                <a href="#skills" className={active === "skills" ? "active" : ""}>Skills</a>
+                <a
+                  href="#skills"
+                  className={active === "skills" ? "active" : ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // show only skills section
+                    setOnlySection("skills");
+                    const el = document.getElementById("skills");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  Skills
+                </a>
               </li>
               <li>
                   <a href="#projects" className={active === "projects" ? "active" : ""}>Projects</a>
@@ -84,17 +110,17 @@ const App: React.FC = () => {
       </header>
 
       <main className="container main">
-        <section id="about" className="about fade-up">
+        <section id="about" className="about fade-up section">
           <h2 className="section-title">About Me</h2>
           <p className="lead">I started with web development and gradually moved into cybersecurity after realizing how critical secure systems are. I'm a 2nd-year Computer Science student at KIST College. My work focuses on practical learning: building small tools, participating in CTFs, and contributing to open documentation. I approach security with curiosity and persistence — aiming to become a confident penetration tester and cloud security practitioner.</p>
         </section>
 
-        <section id="contributions" className="contributions fade-up">
+  <section id="contributions" className="contributions fade-up section">
           <h2 className="section-title">Contributions</h2>
           <div className="contrib-list">
             <article className="card">
               <h3>SAFE-MCP — Documentation Contributor</h3>
-              <p className="muted">Contributed to the SAFE-MCP technique documentation: organizing, editing, and maintaining attacker technique writeups to help practitioners and learners. Notable contributions include writeups and improvements around the SAFE-T1006 technique (detection & mitigation notes), plus general TTP curation and clarity edits.</p>
+              <p className="muted">I contribute to SAFE‑MCP by organizing and clarifying attacker technique documentation, turning research into practical, actionable writeups. My work includes maintaining SAFE‑T1006 and SAFE‑T1912 writeups, improving detection guidance, and curating mitigation notes that teams can apply in detection and response workflows.</p>
               <p className="muted">Repository: <a href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">github.com/rajivsthh/safemcp</a></p>
             </article>
 
@@ -110,7 +136,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section id="skills" className="skills fade-up">
+  <section id="skills" className="skills fade-up section">
           <h2 className="section-title">Skills</h2>
           <div className="skills-grid">
             <div className="skill-block">
@@ -150,7 +176,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-  <section id="projects" className="projects fade-up">
+  <section id="projects" className="projects fade-up section">
           <h2 className="section-title">Selected Projects</h2>
           <p className="lead muted">Short summaries and links for quick review.</p>
           <div className="cards project-grid">
@@ -210,7 +236,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section id="blog" className="blog fade-up">
+  <section id="blog" className="blog fade-up section">
           <h2 className="section-title">Blog</h2>
           <p className="lead muted">Short posts on security, tooling, and practical learning.</p>
           <div className="blog-list">
@@ -241,7 +267,7 @@ const App: React.FC = () => {
           );
         })()}
 
-        <section id="goals" className="goals fade-up">
+  <section id="goals" className="goals fade-up section">
           <h2 className="section-title">Future Goals</h2>
           <ul className="goals-list">
             <li>Become a penetration tester with strong web application expertise.</li>
@@ -250,13 +276,18 @@ const App: React.FC = () => {
           </ul>
         </section>
 
-        <section id="contact" className="contact fade-up">
+        <section id="contact" className="contact fade-up section">
           <h2 className="section-title">Contact</h2>
           <div className="contact-card">
             <p>Email: <a href="mailto:rajivsth0713@gmail.com">rajivsth0713@gmail.com</a></p>
             <p>GitHub: <a href="https://github.com/rajivsthh" target="_blank" rel="noopener noreferrer">github.com/rajivsthh</a></p>
           </div>
         </section>
+        {onlySection && (
+          <div className="only-close">
+            <button className="btn ghost" onClick={() => setOnlySection(null)}>Show all sections</button>
+          </div>
+        )}
       </main>
 
       <footer className="footer">
