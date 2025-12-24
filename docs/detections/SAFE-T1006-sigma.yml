@@ -1,0 +1,31 @@
+title: Suspicious Installer / Typosquatted Package Install
+id: bf9a2c18-3b2a-4f6f-b8e8-1f4a9d2f9f6a
+status: experimental
+description: Detects likely trojanized installer artifacts or suspicious package names that could indicate typosquatting or malicious dependency installs.
+author: rajivsthh
+date: 2025/12/24
+references:
+  - https://owasp.org/www-project-top-10-for-large-language-model-applications/
+
+logsource:
+  product: devops
+  service: package_installer
+
+detection:
+  selection:
+    - EventID: 4100
+      Message|contains:
+        - "npm install"
+        - "pip install"
+        - "composer require"
+    - EventID: 4101
+      PackageName|re:
+        - "(^|\W)(react)[a-z]{1,6}($|\W)"  # example typosquatted pattern
+        - "(^|\W)(expressx)($|\W)"
+  condition: selection
+
+falsepositives:
+  - Internal testing of packages with unusual names
+  - Automated package mirrors doing legitimate syncs
+
+level: high
