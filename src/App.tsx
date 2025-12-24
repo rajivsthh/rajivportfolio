@@ -91,17 +91,23 @@ const App: React.FC = () => {
 
         <section id="contributions" className="contributions fade-up">
           <h2 className="section-title">Contributions</h2>
-          <ul className="contrib-list">
-            <li>
-              <strong>SAFE-MCP</strong> — Contributor to cybersecurity technique documentation: organizing, updating, and maintaining attacker technique writeups to improve clarity and usability for red-team workflows.
-            </li>
-            <li>
-              <strong>100x Hackathon</strong> — Active participant in hackathon events, collaborating on rapid prototypes and solving real problems under time constraints.
-            </li>
-            <li>
-              <strong>KIST College projects</strong> — Ongoing involvement in college projects, learning teamwork, software design, and deployment basics.
-            </li>
-          </ul>
+          <div className="contrib-list">
+            <article className="card">
+              <h3>SAFE-MCP — Documentation Contributor</h3>
+              <p className="muted">Contributed to the SAFE-MCP technique documentation: organizing, editing, and maintaining attacker technique writeups to help practitioners and learners. Notable contributions include writeups and improvements around the SAFE-T1006 technique (detection & mitigation notes), plus general TTP curation and clarity edits.</p>
+              <p className="muted">Repository: <a href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">github.com/rajivsthh/safemcp</a></p>
+            </article>
+
+            <article className="card">
+              <h3>100x Hackathon — Participant</h3>
+              <p className="muted">Participated in rapid-prototype hackathons (Team Control Bits) focusing on problem solving, teamwork, and building usable prototypes under tight deadlines.</p>
+            </article>
+
+            <article className="card">
+              <h3>KIST College — Projects & Activities</h3>
+              <p className="muted">Active in college projects and group activities at KIST College. Work includes collaborative software projects, learning deployments, and presenting technical solutions.</p>
+            </article>
+          </div>
         </section>
 
         <section id="skills" className="skills fade-up">
