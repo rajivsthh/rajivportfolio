@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import posts from "./data/posts";
 
 const App: React.FC = () => {
   const [active, setActive] = useState<string>("about");
+  const [selectedPost, setSelectedPost] = useState<string | null>(null);
 
   useEffect(() => {
-    const ids = ["about", "contributions", "skills", "projects", "goals", "contact"];
+    const ids = ["about", "contributions", "skills", "projects", "blog", "goals", "contact"];
     const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
@@ -51,8 +53,11 @@ const App: React.FC = () => {
                 <a href="#skills" className={active === "skills" ? "active" : ""}>Skills</a>
               </li>
               <li>
-                <a href="#projects" className={active === "projects" ? "active" : ""}>Projects</a>
-              </li>
+                  <a href="#projects" className={active === "projects" ? "active" : ""}>Projects</a>
+                </li>
+                <li>
+                  <a href="#blog" className={active === "blog" ? "active" : ""}>Blog</a>
+                </li>
               <li>
                 <a href="#goals" className={active === "goals" ? "active" : ""}>Goals</a>
               </li>
@@ -139,7 +144,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section id="projects" className="projects fade-up">
+  <section id="projects" className="projects fade-up">
           <h2 className="section-title">Selected Projects</h2>
           <p className="lead muted">Short summaries and links for quick review.</p>
           <div className="cards project-grid">
@@ -198,6 +203,37 @@ const App: React.FC = () => {
             </article>
           </div>
         </section>
+
+        <section id="blog" className="blog fade-up">
+          <h2 className="section-title">Blog</h2>
+          <p className="lead muted">Short posts on security, tooling, and practical learning.</p>
+          <div className="blog-list">
+            {posts.map((p) => (
+              <article key={p.id} className="card post-card" onClick={() => setSelectedPost(p.id)} role="button" tabIndex={0} onKeyPress={(e) => { if (e.key === 'Enter') setSelectedPost(p.id); }}>
+                <div className="post-head">
+                  <h3>{p.title}</h3>
+                  <small className="muted">{p.date}</small>
+                </div>
+                <p className="muted">{p.excerpt}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {selectedPost && (() => {
+          const post = posts.find((x) => x.id === selectedPost);
+          if (!post) return null;
+          return (
+            <div className="post-modal" role="dialog" aria-modal="true">
+              <div className="post-modal-content">
+                <button className="modal-close" onClick={() => setSelectedPost(null)} aria-label="Close post">×</button>
+                <h2>{post.title}</h2>
+                <small className="muted">{post.date}</small>
+                <div className="post-body" dangerouslySetInnerHTML={{ __html: post.content }} />
+              </div>
+            </div>
+          );
+        })()}
 
         <section id="goals" className="goals fade-up">
           <h2 className="section-title">Future Goals</h2>
