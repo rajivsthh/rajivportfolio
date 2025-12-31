@@ -121,8 +121,12 @@ html { scroll-behavior: smooth; }
 
 /* Show only a single section when the user requests focus */
 .app-root.only-show main > .section { display: none; }
-.app-root.only-show main > #skills { display: block; }
+.app-root.only-show main > #skills, .app-root.only-show main > #resume, .app-root.only-show main > #contributions { display: block; }
 .only-close { position: fixed; right: 1rem; top: 6.5rem; z-index: 80; }
+
+/* resume embed styles */
+.resume-frame { margin-top: 0.75rem; background: var(--card); padding: .75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); }
+.resume-frame iframe { width: 100%; height: 70vh; border: none; border-radius: 8px; }
 
 .footer { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.03); display:flex; justify-content:space-between; align-items:center; gap:1rem; }
 .footer small { color: var(--muted); }

@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [onlySection, setOnlySection] = useState<string | null>(null);
 
   useEffect(() => {
-    const ids = ["about", "contributions", "skills", "projects", "blog", "goals", "contact"];
+    const ids = ["about", "contributions", "skills", "projects", "blog", "contact"];
     const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!sections.length) return;
 
@@ -61,7 +61,18 @@ const App: React.FC = () => {
                 <a href="#about" className={active === "about" ? "active" : ""}>About</a>
               </li>
               <li>
-                <a href="#contributions" className={active === "contributions" ? "active" : ""}>Contributions</a>
+                <a
+                  href="#contributions"
+                  className={active === "contributions" ? "active" : ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOnlySection("contributions");
+                    const el = document.getElementById("contributions");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  Contributions
+                </a>
               </li>
               <li>
                 <a
@@ -84,9 +95,7 @@ const App: React.FC = () => {
                 <li>
                   <a href="#blog" className={active === "blog" ? "active" : ""}>Blog</a>
                 </li>
-              <li>
-                <a href="#goals" className={active === "goals" ? "active" : ""}>Goals</a>
-              </li>
+              {/* Goals removed — intentionally omitted from nav */}
               <li>
                 <a href="#contact" className={active === "contact" ? "active" : ""}>Contact</a>
               </li>
@@ -95,16 +104,19 @@ const App: React.FC = () => {
 
           <div className="header-actions">
             <a className="btn" href="mailto:rajivsth0713@gmail.com">Email</a>
-            <a
+            <button
               className="btn ghost"
-              href="/resume.pdf"
-              download="Rajiv-Shrestha-Resume.pdf"
-              aria-label="Download Rajiv Shrestha resume (PDF)"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                // show only the resume section (no download)
+                setOnlySection("resume");
+                const el = document.getElementById("resume");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              aria-label="Open Rajiv Shrestha resume (view)"
             >
               Resume
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -252,6 +264,20 @@ const App: React.FC = () => {
           </div>
         </section>
 
+    <section id="resume" className="resume fade-up section" tabIndex={-1}>
+            <h2 className="section-title">Resume</h2>
+            <div className="resume-frame">
+              {/* embed the committed resume PDF so clicking Resume shows only the resume */}
+              <iframe
+                src="/resume.pdf"
+                title="Rajiv Shrestha Resume"
+                aria-label="Resume PDF viewer"
+                frameBorder={0}
+                style={{ width: '100%', height: '70vh', borderRadius: 8 }}
+              />
+            </div>
+          </section>
+
         {selectedPost && (() => {
           const post = posts.find((x) => x.id === selectedPost);
           if (!post) return null;
@@ -267,14 +293,7 @@ const App: React.FC = () => {
           );
         })()}
 
-  <section id="goals" className="goals fade-up section">
-          <h2 className="section-title">Future Goals</h2>
-          <ul className="goals-list">
-            <li>Become a penetration tester with strong web application expertise.</li>
-            <li>Gain practical cloud security skills and secure cloud-native applications.</li>
-            <li>Contribute to open tooling and documentation that helps defenders and red teamers alike.</li>
-          </ul>
-        </section>
+        {/* Goals section removed per request */}
 
         <section id="contact" className="contact fade-up section">
           <h2 className="section-title">Contact</h2>
