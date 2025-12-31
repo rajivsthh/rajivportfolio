@@ -137,6 +137,22 @@ const App: React.FC = () => {
             </article>
 
             <article className="card">
+              <h3>SAFE‑T1912 — Stego Response Exfiltration</h3>
+              <p className="muted">Brief: documented a technique where attackers hide covert payloads inside AI/MCP responses (zero‑width Unicode, encoded blobs, or code/JSON fields). I produced a concise detection & mitigation brief with indicators (zero‑width chars, unexpected base64), an example detection rule, and recommended sanitization and response steps to help teams prevent exfiltration via copied AI outputs.</p>
+              <div className="card-actions">
+                <a className="btn-link" href="https://github.com/rajivsthh/rajivportfolio/blob/main/docs/SAFE-T1912.md" target="_blank" rel="noopener noreferrer">Read more</a>
+              </div>
+            </article>
+
+            <article className="card">
+              <h3>SAFE‑T1006 — User Social‑Engineering Install</h3>
+              <p className="muted">Brief: documented social‑engineering install vectors where attackers lure users to install trojanized packages or installers (phishing, typosquatting, registry poisoning). I produced detection guidance for monitoring install behavior and registry changes, plus mitigations like package verification, supply‑chain controls, and network monitoring to catch post‑install agent activity.</p>
+              <div className="card-actions">
+                <a className="btn-link" href="https://github.com/rajivsthh/rajivportfolio/blob/main/docs/SAFE-T1006.md" target="_blank" rel="noopener noreferrer">Read more</a>
+              </div>
+            </article>
+
+            <article className="card">
               <h3>100x Hackathon — Participant</h3>
               <p className="muted">Participated in rapid-prototype hackathons (Team Control Bits) focusing on problem solving, teamwork, and building usable prototypes under tight deadlines.</p>
             </article>
