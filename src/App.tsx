@@ -90,7 +90,19 @@ const App: React.FC = () => {
                 </a>
               </li>
               <li>
-                  <a href="#projects" className={active === "projects" ? "active" : ""}>Projects</a>
+                  <a
+                    href="#projects"
+                    className={active === "projects" ? "active" : ""}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // show only projects (hackathons)
+                      setOnlySection("projects");
+                      const el = document.getElementById("projects");
+                      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                  >
+                    Projects
+                  </a>
                 </li>
                 <li>
                   <a href="#blog" className={active === "blog" ? "active" : ""}>Blog</a>
@@ -208,59 +220,108 @@ const App: React.FC = () => {
           <h2 className="section-title">Selected Projects</h2>
           <p className="lead muted">Short summaries and links for quick review.</p>
           <div className="cards project-grid">
-            {/* SEEKHANEPAL */}
-            <article className="card project-card">
-              <div className="project-header">
-                <h3>SEEKHANEPAL — KIST Hackathon</h3>
-                <div className="tech-list">
-                  <span className="tag">React</span>
-                </div>
-              </div>
-              <p>Platform to help students discover interests with interactive demos and an AI assistant.</p>
-              <div className="card-actions">
-                <a className="btn-link" href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
-                <a className="btn-link" href="https://github.com/rajivsthh/seekhanepal" target="_blank" rel="noopener noreferrer">Source</a>
-              </div>
-            </article>
+            {(() => {
+              const showOnly = onlySection === 'projects';
+              // featured filter: hackathons and labs (PortsWigger, TryHackMe)
+              const isFeatured = (title: string) => /hackathon|lab|tryhackme|portswigger/i.test(title);
+              return (
+                <>
+                  {/* SEEKHANEPAL */}
+                  {(!showOnly || isFeatured('SEEKHANEPAL — KIST Hackathon')) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>SEEKHANEPAL — KIST Hackathon</h3>
+                        <div className="tech-list">
+                          <span className="tag">React</span>
+                        </div>
+                      </div>
+                      <p>Platform to help students discover interests with interactive demos and an AI assistant.</p>
+                      <div className="card-actions">
+                        <a className="btn-link" href="https://seekhanepal.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                        <a className="btn-link" href="https://github.com/rajivsthh/seekhanepal" target="_blank" rel="noopener noreferrer">Source</a>
+                      </div>
+                    </article>
+                  )}
 
-            {/* SarkarSevaSaathi */}
-            <article className="card project-card">
-              <div className="project-header">
-                <h3>SarkarSevaSaathi — 100x Hackathon</h3>
-                <div className="tech-list">
-                  <span className="tag">Fullstack</span>
-                </div>
-              </div>
-              <p>Form Mitra Smart — a govtech web app to help citizens complete government forms accurately.</p>
-              <div className="card-actions">
-                <a className="btn-link" href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">Hackathon</a>
-              </div>
-            </article>
+                  {/* SarkarSevaSaathi */}
+                  {(!showOnly || isFeatured('SarkarSevaSaathi — 100x Hackathon')) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>SarkarSevaSaathi — 100x Hackathon</h3>
+                        <div className="tech-list">
+                          <span className="tag">Fullstack</span>
+                        </div>
+                      </div>
+                      <p>Form Mitra Smart — a govtech web app to help citizens complete government forms accurately.</p>
+                      <div className="card-actions">
+                        <a className="btn-link" href="https://100x-hackathon.vercel.app/about" target="_blank" rel="noopener noreferrer">Hackathon</a>
+                      </div>
+                    </article>
+                  )}
 
-            {/* Network Scanner */}
-            <article className="card project-card">
-              <div className="project-header">
-                <h3>Network Security Scanner</h3>
-                <div className="tech-list">
-                  <span className="tag">Bash</span>
-                </div>
-              </div>
-              <p>Bash-based tool for network reconnaissance and learning practical scanning techniques.</p>
-            </article>
+                  {/* PortSwigger labs (featured lab) */}
+                  {(!showOnly || isFeatured('PortSwigger Labs')) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>PortSwigger Labs — Web Security Labs</h3>
+                        <div className="tech-list">
+                          <span className="tag">Web</span>
+                        </div>
+                      </div>
+                      <p>Completed multiple PortSwigger web security labs covering XSS, SQLi, logic flaws, and more. Practical hands-on exercise to improve web app testing skills.</p>
+                      <div className="card-actions">
+                        <a className="btn-link" href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">Labs</a>
+                      </div>
+                    </article>
+                  )}
 
-            {/* SafeMCP */}
-            <article className="card project-card">
-              <div className="project-header">
-                <h3>SAFE-MCP — Documentation Contributor</h3>
-                <div className="tech-list">
-                  <span className="tag">Security</span>
-                </div>
-              </div>
-              <p>Helping organize and maintain attacker technique writeups to improve clarity and usability for practitioners.</p>
-              <div className="card-actions">
-                <a className="btn-link" href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">Repository</a>
-              </div>
-            </article>
+                  {/* TryHackMe labs (featured lab) */}
+                  {(!showOnly || isFeatured('TryHackMe Labs')) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>TryHackMe — Capture the Flag & Learning Rooms</h3>
+                        <div className="tech-list">
+                          <span className="tag">Labs</span>
+                        </div>
+                      </div>
+                      <p>Completed TryHackMe rooms and CTF-style labs focused on web exploitation, Linux enumeration, and basic privilege escalation.</p>
+                      <div className="card-actions">
+                        <a className="btn-link" href="https://tryhackme.com" target="_blank" rel="noopener noreferrer">Profile / Rooms</a>
+                      </div>
+                    </article>
+                  )}
+
+                  {/* Network Scanner (non-hackathon) */}
+                  {(!showOnly) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>Network Security Scanner</h3>
+                        <div className="tech-list">
+                          <span className="tag">Bash</span>
+                        </div>
+                      </div>
+                      <p>Bash-based tool for network reconnaissance and learning practical scanning techniques.</p>
+                    </article>
+                  )}
+
+                  {/* SafeMCP (non-hackathon) */}
+                  {(!showOnly) && (
+                    <article className="card project-card">
+                      <div className="project-header">
+                        <h3>SAFE-MCP — Documentation Contributor</h3>
+                        <div className="tech-list">
+                          <span className="tag">Security</span>
+                        </div>
+                      </div>
+                      <p>Helping organize and maintain attacker technique writeups to improve clarity and usability for practitioners.</p>
+                      <div className="card-actions">
+                        <a className="btn-link" href="https://github.com/rajivsthh/safemcp" target="_blank" rel="noopener noreferrer">Repository</a>
+                      </div>
+                    </article>
+                  )}
+                </>
+              );
+            })()}
           </div>
         </section>
 

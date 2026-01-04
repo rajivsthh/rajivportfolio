@@ -121,7 +121,7 @@ html { scroll-behavior: smooth; }
 
 /* Show only a single section when the user requests focus */
 .app-root.only-show main > .section { display: none; }
-.app-root.only-show main > #skills, .app-root.only-show main > #resume, .app-root.only-show main > #contributions { display: block; }
+.app-root.only-show main > #skills, .app-root.only-show main > #resume, .app-root.only-show main > #contributions, .app-root.only-show main > #projects { display: block; }
 .only-close { position: fixed; right: 1rem; top: 6.5rem; z-index: 80; }
 
 /* resume embed styles */
